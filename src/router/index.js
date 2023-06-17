@@ -80,73 +80,71 @@ export const constantRoutes = [
       }
     ]
   },
-
   {
-    path: '/nested',
+    path: '/imageAnalyse',
     component: Layout,
-    redirect: '/nested/menu1',
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: '设置',
-        meta: { title: '设置', icon: 'nested' }
-
-        //   children: [
-        //     {
-        //       path: 'menu1-1',
-        //       component: () => import('@/views/nested/menu1/menu1-1'),
-        //       name: 'Menu1-1',
-        //       meta: { title: 'Menu1-1' }
-        //     },
-        //     {
-        //       path: 'menu1-2',
-        //       component: () => import('@/views/nested/menu1/menu1-2'),
-        //       name: 'Menu1-2',
-        //       meta: { title: 'Menu1-2' },
-        //       children: [
-        //         {
-        //           path: 'menu1-2-1',
-        //           component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-        //           name: 'Menu1-2-1',
-        //           meta: { title: 'Menu1-2-1' }
-        //         },
-        //         {
-        //           path: 'menu1-2-2',
-        //           component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-        //           name: 'Menu1-2-2',
-        //           meta: { title: 'Menu1-2-2' }
-        //         }
-        //       ]
-        //     },
-        //     {
-        //       path: 'menu1-3',
-        //       component: () => import('@/views/nested/menu1/menu1-3'),
-        //       name: 'Menu1-3',
-        //       meta: { title: 'Menu1-3' }
-        //     }
-        //   ]
-        // },
-        // {
-        //   path: 'menu2',
-        //   component: () => import('@/views/nested/menu2/index'),
-        //   name: 'Menu2',
-        //   meta: { title: 'menu2' }
+        path: 'index',
+        name: '图像分析',
+        component: () => import('@/views/imageAnalyse/index'),
+        meta: { title: '图像分析', icon: 'form' }
       }
     ]
   },
-
   // {
-  //   path: 'external-link',
+  //   path: '/imageAnalyse',
   //   component: Layout,
+  //   redirect: '/imageAnalyse',
   //   children: [
   //     {
-  //       path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-  //       meta: { title: 'External Link', icon: 'link' }
+  //       path: 'imageAnalyse',
+  //       component: () => import('@/views/imageAnalyse/index'), // Parent router-view
+  //       name: '图像分析',
+  //       meta: { title: '图像分析', icon: 'nested' }
+  //   children: [
+  //     {
+  //       path: 'menu1-1',
+  //       component: () => import('@/views/nested/menu1/menu1-1'),
+  //       name: 'Menu1-1',
+  //       meta: { title: 'Menu1-1' }
+  //     },
+  //     {
+  //       path: 'menu1-2',
+  //       component: () => import('@/views/nested/menu1/menu1-2'),
+  //       name: 'Menu1-2',
+  //       meta: { title: 'Menu1-2' },
+  //       children: [
+  //         {
+  //           path: 'menu1-2-1',
+  //           component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+  //           name: 'Menu1-2-1',
+  //           meta: { title: 'Menu1-2-1' }
+  //         },
+  //         {
+  //           path: 'menu1-2-2',
+  //           component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+  //           name: 'Menu1-2-2',
+  //           meta: { title: 'Menu1-2-2' }
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       path: 'menu1-3',
+  //       component: () => import('@/views/nested/menu1/menu1-3'),
+  //       name: 'Menu1-3',
+  //       meta: { title: 'Menu1-3' }
   //     }
   //   ]
   // },
-
+  // {
+  //   path: 'menu2',
+  //   component: () => import('@/views/nested/menu2/index'),
+  //   name: 'Menu2',
+  //   meta: { title: 'menu2' }
+  // }
+  // ]
+  // },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
@@ -160,7 +158,7 @@ const createRouter = () => new Router({
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter () {
+export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
