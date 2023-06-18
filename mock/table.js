@@ -5,6 +5,8 @@ const data = Mock.mock({
     id: '@id',
     name: '@cname',
     age: '@integer(1,100)',
+    cdate: '@date',
+    bdate: '@date',
     'sex|1': ['男', '女'],
     f_num: '@integer(300, 5000)',
     'invasive|1': ['是', '否'],

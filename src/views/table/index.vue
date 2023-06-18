@@ -3,7 +3,63 @@
 
     <div class="deleteSearch">
       <div style="margin-top:10px; max-resolution: 10px; margin-left: 20px;">检索：<el-input v-model="searchText" placeholder="姓名检索" clearable size="medium" />
-        <!-- 筛选：<el-input v-model="searchText" placeholder="姓名检索" clearable size="medium" /> -->
+        筛选：
+        <el-date-picker
+          v-model="datasel"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          size="medium"
+        />
+        病理亚型：
+        <el-select
+          v-model="sel_bingli"
+          filterable
+          allow-create
+          default-first-option
+          size="medium"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in p_sub_op"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
+        脑侵袭：<el-select
+          v-model="sel_inverse"
+          filterable
+          allow-create
+          default-first-option
+          size="medium"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in p_inv_op"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select> <br>
+
+        分级：
+        <el-select
+          v-model="sel_level"
+          filterable
+          allow-create
+          default-first-option
+          size="medium"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in p_lev_op"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          />
+        </el-select>
         <el-button class="my-button" type="danger" icon="el-icon-delete" size="medium" @click="deleteBatch()">删除</el-button></div>
     </div>
 
@@ -42,7 +98,7 @@
       <el-table-column label="患者临床信息" width="400" align="center">
         <template slot-scope="scope">
           <div>年龄：{{ scope.row.age }} 性别：{{ scope.row.sex }}</div> <br>
-          <div>出生年月：{{ scope.row.age }} 检查日期：{{ scope.row.sex }}</div><br>
+          <div>出生年月：{{ scope.row.bdate }} 检查日期：{{ scope.row.cdate }}</div><br>
           <div>主诉：<el-input v-model="scope.row.vig" size="mini" placeholder="请输入" class="square" style="display:inline" /></div><br>
           <div>备注：<el-input v-model="scope.row.vig" size="mini" placeholder="请输入" class="square" style="display:inline" /></div><br>
           <div><el-button type="primary" size="small">上传</el-button></div>
@@ -232,6 +288,10 @@ export default {
     return {
       list: null,
       listLoading: true,
+      datasel: '',
+      sel_bingli: '',
+      sel_inverse: '',
+      sel_level: '',
       p_inv_op: [
         { value: '选项1', label: '是' },
         { value: '选项2', label: '否' }],
