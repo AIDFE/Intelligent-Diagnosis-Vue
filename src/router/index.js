@@ -69,6 +69,22 @@ export const constantRoutes = [
   },
 
   {
+    path: '/',
+    component: Layout,
+    redirect: '/File-upload',
+    name: 'File-upload',
+    meta: { title: 'File-upload', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'File-upload',
+        name: 'File-upload',
+        component: () => import('@/views/File-upload/index'),
+        meta: { title: '上传文件', icon: 'table' }
+      },
+    ]
+  },
+
+  {
     path: '/form',
     component: Layout,
     children: [
