@@ -16,7 +16,7 @@
         <label for="filename" class="upload-uploadbutton">上传文件</label>
       </button>
       <div class="upload-preview">
-        <p>No files currently selected for upload</p>
+        <p style="font-size:10px">未上传文件</p>
       </div>
       <div class = "upload-confirm">
         <button class="upload-button">
