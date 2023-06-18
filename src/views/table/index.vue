@@ -2,8 +2,9 @@
   <div class="studylist">
 
     <div class="deleteSearch">
-      <el-button type="primary" icon="el-icon-delete" plain @click="deleteBatch()">删除</el-button>
-      <el-input v-model="searchText" placeholder="请输入内容" clearable />
+      <div style="margin-top:10px; max-resolution: 10px; margin-left: 20px;">检索：<el-input v-model="searchText" placeholder="姓名检索" clearable size="medium" />
+        <!-- 筛选：<el-input v-model="searchText" placeholder="姓名检索" clearable size="medium" /> -->
+        <el-button class="my-button" type="danger" icon="el-icon-delete" size="medium" @click="deleteBatch()">删除</el-button></div>
     </div>
 
     <el-table
@@ -267,7 +268,13 @@ export default {
       searchText: '',
       multipleSelection: [] }
   },
-
+  computed: {
+    studylist: function() {
+      return this.list.filter(item => {
+        return item.name.include(this.searchText)
+      })
+    }
+  },
   created() {
     this.fetchData()
   },
@@ -301,8 +308,17 @@ export default {
     width: 90px !important;
   }
 
-  .el-button--primary{
+.my-button{
+  width: 80px;
+  margin-left: 1300px;
+  margin-bottom: 10px;
+}
+.el-button--primary{
   margin-top: 20px;
 }
 
+.el-input{
+  width: 180px;
+
+}
 </style>
