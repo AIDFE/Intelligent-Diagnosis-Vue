@@ -3,8 +3,8 @@
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <div class="bar-head">
       <div style="display:flex">
-        <img v-if="logo" :src="logo" style="width:385px;height:67px;margin-top:11px;margin-left:7px">
-      </div>
+        <img v-if="logo" :src="logo" style="width:80px;height:80px;margin-top:0px;margin-left:20px">
+        <h1>  脑膜瘤智能分级诊断系统 (IGDS-M)</h1></div>
       <div class="right-menu">
         <el-dropdown class="avatar-container" trigger="click" placement="bottom-end" :hide-on-click="true">
           <div class="avatar-wrapper">
@@ -100,6 +100,7 @@ export default {
       top: 0;
     }
   }
+
   .drawer-bg {
     background: #000;
     opacity: 0.3;
