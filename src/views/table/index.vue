@@ -1,6 +1,13 @@
 <template>
-  <div class="app-container">
+  <div class="studylist">
+
+    <div class="deleteSearch">
+      <el-button type="primary" icon="el-icon-delete" plain @click="deleteBatch()">删除</el-button>
+      <el-input v-model="searchText" placeholder="请输入内容" clearable />
+    </div>
+
     <el-table
+      ref="multipleTable"
       v-loading="listLoading"
       :data="list"
       element-loading-text="Loading"
@@ -17,7 +24,11 @@
         width="55"
       />
 
-      <el-table-column align="center" label="ID" width="95">
+      <el-table-column
+        align="center"
+        label="ID"
+        width="95"
+      >
         <el-table-column align="center" label="患者姓名" width="95">
           <el-table-column label="F号" width="100" align="center">
             <template slot-scope="scope">
@@ -198,13 +209,13 @@
       </el-table-column>
 
     </el-table>
-  </div>
-</template>
+  </div></template>
 
 <script>
 import { getList } from '@/api/table'
 
 export default {
+  name: '',
   filters: {
     statusFilter(status) {
       const statusMap = {
@@ -215,6 +226,7 @@ export default {
       return statusMap[status]
     }
   },
+
   data() {
     return {
       list: null,
@@ -251,9 +263,11 @@ export default {
         { value: '选项3', label: '三级' },
         { value: '选项3', label: '四级' }],
       p_region: [
-        { value: '选项1', label: '无' }]
-    }
+        { value: '选项1', label: '无' }],
+      searchText: '',
+      multipleSelection: [] }
   },
+
   created() {
     this.fetchData()
   },
@@ -262,10 +276,23 @@ export default {
       this.listLoading = true
       getList().then(response => {
         this.list = response.data.items
+        console.log(this.list)
         this.listLoading = false
+      })
+    },
+    deleteBatch() {
+      var d = this.list
+      this.$refs.multipleTable.selection.forEach((Ele, index) => {
+        for (var i = 0; i < d.length; i++) {
+          var t = d[i].name
+          if (t === Ele.name) {
+            d.splice(i, 1)
+          }
+        }
       })
     }
   }
+
 }
 </script>
 

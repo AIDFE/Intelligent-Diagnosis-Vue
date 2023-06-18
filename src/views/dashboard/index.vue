@@ -4,19 +4,6 @@
   </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
-
-export default {
-  name: '',
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
-  }
-}
-</script>
-
 <style lang="scss" scoped>
 .dashboard {
   &-container {
