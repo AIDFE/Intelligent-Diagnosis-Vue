@@ -6,7 +6,7 @@
     <hr color="gray" size="5" >
     <div class="dashboard-chosen">
       <button class="dashboard-button">
-        查看病例<br/>
+        <router-link to="/example/table" style="color:rgba(255,255,255,1)">查看病例<br/></router-link>
         <a href="#"> 提示:xxx </a>
       </button>
       <button class="dashboard-button">
