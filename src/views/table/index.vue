@@ -332,10 +332,10 @@ export default {
   computed: {
     filteredData() {
       if (!this.filterText) {
-        return this.list;
+        return this.list
       }
-      const filterText = this.filterText.toLowerCase();
-      return this.list.filter(item => item.name.toLowerCase().includes(filterText));
+      const filterText = this.filterText.toLowerCase()
+      return this.list.filter(item => item.name.toLowerCase().includes(filterText))
     }
   },
   created() {

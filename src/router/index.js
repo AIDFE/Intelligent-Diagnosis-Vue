@@ -67,6 +67,19 @@ export const constantRoutes = [
         meta: { title: '病例列表', icon: 'el-icon-s-help' }
       }]
   },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/File-upload',
+    children: [
+      {
+        path: 'File-upload',
+        name: '上传文件',
+        component: () => import('@/views/File-upload/index'),
+        meta: { title: '上传文件', icon: 'table' }
+      }
+    ]
+  },
 
   {
     path: '/form',
@@ -158,7 +171,7 @@ const createRouter = () => new Router({
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter() {
+export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
