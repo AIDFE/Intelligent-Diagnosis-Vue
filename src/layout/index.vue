@@ -4,7 +4,7 @@
     <div class="bar-head">
       <div style="display:flex">
         <img v-if="logo" :src="logo" style="width:80px;height:80px;margin-top:0px;margin-left:20px">
-        <h1>  脑膜瘤智能分级诊断系统 (IGDS-M)</h1></div>
+        <h1 style="line-height:40px">  脑膜瘤智能分级诊断系统 (IGDS-M) </h1></div>
       <div class="right-menu">
         <el-dropdown class="avatar-container" trigger="click" placement="bottom-end" :hide-on-click="true">
           <div class="avatar-wrapper">

@@ -2,7 +2,7 @@
   <div class="studylist">
 
     <div class="deleteSearch">
-      <div style="margin-top:10px; max-resolution: 10px; margin-left: 20px;">检索：<el-input v-model="searchText" placeholder="姓名检索" clearable size="medium" />
+      <div style="margin-top:10px; max-resolution: 10px; margin-left: 20px;">检索：<el-input v-model="filterText" placeholder="姓名检索" clearable size="medium" />
         筛选：
         <el-date-picker
           v-model="datasel"
@@ -66,7 +66,7 @@
     <el-table
       ref="multipleTable"
       v-loading="listLoading"
-      :data="list"
+      :data="filteredData"
       element-loading-text="Loading"
       border
       fit
@@ -287,6 +287,7 @@ export default {
   data() {
     return {
       list: null,
+      filterText: '',
       listLoading: true,
       datasel: '',
       sel_bingli: '',
@@ -329,10 +330,12 @@ export default {
       multipleSelection: [] }
   },
   computed: {
-    studylist: function() {
-      return this.list.filter(item => {
-        return item.name.include(this.searchText)
-      })
+    filteredData() {
+      if (!this.filterText) {
+        return this.list;
+      }
+      const filterText = this.filterText.toLowerCase();
+      return this.list.filter(item => item.name.toLowerCase().includes(filterText));
     }
   },
   created() {
