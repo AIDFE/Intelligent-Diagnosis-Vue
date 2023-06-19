@@ -1,19 +1,38 @@
 <template>
   <div class="dashboard-container">
     <div class="dashboard-text">在线智能诊断系统</div>
-    <div class="dashboard-tips">提示</div>
-    <div class="dashboard-instructions">用户使用说明</div>
-    <hr color="gray" size="5">
-    <div class="dashboard-chosen">
-      <button class="dashboard-button">
-        <router-link to="/example/table" style="color:rgba(255,255,255,1)">查看病例<br></router-link>
-        <a href="#"> 提示:xxx </a>
-      </button>
-      <button class="dashboard-button">
-        <router-link to="/File-upload" style="color:rgba(255,255,255,1)">上传数据<br></router-link>
-        <a href="#"> 提示:xxx </a>
-      </button>
-    </div>
+    <el-badge is-dot class="item"><font class="dashboard-tips">提示</font></el-badge>
+    <div class="dashboard-instructions">欢迎使用脑膜瘤智能分级诊断系统！本系统基于xx算法，可以快速准确地帮助您进行脑膜瘤的分级诊断。在使用本系统前，请您先仔细查看<el-link :underline="false" type="primary" style="font-size: 18px;line-height: 46px;margin-top: -3px;">使用指南</el-link>。</div>
+    <div class="dashboard-instructions">如有任何疑问，欢迎随时联系我们的运营人员。祝您健康！</div>
+    <!-- <hr color="gray" size="5"> -->
+    <el-divider><i class="el-icon-s-opportunity" /></el-divider>
+
+    <el-row :gutter="520" style="margin-top:48px;">
+      <el-col :span="12">
+        <el-card shadow="hover" style="width: 100%;">
+          <div slot="header">
+            <span>快捷查看病例列表入口</span>
+          </div>
+          <div class="dashboard-chosen">
+            <button class="dashboard-button">
+              <router-link to="/example/table" style="color:rgba(255,255,255,1)">查看病例<br></router-link>
+            </button>
+          </div>
+        </el-card>
+      </el-col>
+      <el-col :span="12">
+        <el-card shadow="hover" style="width: 100%;">
+          <div slot="header">
+            <span>快捷上传数据入口</span>
+          </div>
+          <div class="dashboard-chosen">
+            <button class="dashboard-button" style="background-color:#67C23A">
+              <router-link to="/File-upload" style="color:rgba(255,255,255,1)">上传数据<br></router-link>
+            </button>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
 
   </div>
 </template>
@@ -44,11 +63,11 @@ export default {
   &-text {
     font-size: 30px;
     line-height: 46px;
-    font-weight:700
+    font-weight:700;
+    margin-bottom: 48px;
   }
   &-instructions {
-    margin-bottom: 100px;
-    font-size: 15px;
+    font-size: 18px;
     line-height: 46px;
   }
   &-chosen {
@@ -59,13 +78,13 @@ export default {
     width: 300px;
     height: 100px;
     color: rgba(255, 255, 255, 1);
-    background-color: rgba(51, 109, 255, 1);
+    background-color: rgba(15, 95, 237);
     border: 1px solid rgba(156, 11, 246, 0.186);
-    border-radius: 5px;
+    border-radius: 2px;
   }
   &-button > a{
     margin-top: 25px;
-    font-size: 5px;
+    font-size: 20px;
     color: rgba(139, 0, 46, 0.816);
   }
   &-button:nth-of-type(2) {

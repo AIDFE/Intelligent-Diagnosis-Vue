@@ -1,0 +1,177 @@
+.tech-box {
+    width: 100%;
+    height: auto;
+    padding: 24px 24px;
+    background-color: #fff;
+    margin-bottom: 16px;
+}
+
+.tech-title {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 8px;
+    display: flex;
+  
+    .tech-title-line {
+      width: 3px;
+      height: 14px;
+      background: #0F5FED;
+      margin: 1px 8px 1px 0;
+    }
+  
+    .tech-title-text {
+      height: 16px;
+      font-size: 16px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.85);
+      line-height: 16px;
+    }
+  
+    .tech-title-control {
+      height: 32px;
+      line-height: 32px;
+      margin-left: auto;
+      margin-top: -8px;
+  
+      //   display: flex;
+      //   justify-content: flex-start;
+      .tech-title-control-btn {
+        height: 32px;
+        padding: 0 16px;
+        margin: 0 0 0 16px;
+        line-height: 32px;
+        text-align: center;
+        border-radius: 2px;
+        // color: #ffffff;
+        // border: none;
+        font-size: 14px;
+      }
+    }
+}
+
+.tech-search {
+    // height: 40px;
+    width: 100%;
+    // line-height: 40px;
+    // margin: 5px 50px 0 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  
+    .tech-search-item {
+      width: 32%;
+      margin: 16px 16px 0 0;
+      height: 32px;
+      display: flex;
+  
+      .tech-search-item-text {
+        display:table;
+        min-width: 60px;
+        height: 32px;
+        line-height: 32px !important;
+        margin: 0 14px 0 0;
+        font-size: 14px;
+        line-height: 32px;
+        color: #000000;
+      }
+  
+      .tech-search-item-input {
+        // width: 262px;
+        ::v-deep input {
+          height: 32px !important;
+          line-height: 32px !important;
+        }
+  
+        ::v-deep .el-input__icon {
+          height: 44px; //设置高度，icon元素恢复原来的高度，这时arror才能垂直居中
+          position: relative;
+          top: -6px; // 元素整体上移，让箭头也居中
+        }
+      }
+      // 给时间选择器设置宽度
+  
+      // .tech-search-item-option {
+      //   width: 224px;
+      //   margin-left: 24px;
+      //   ::v-deep input {
+      //     height: 40px !important;
+      //     line-height: 40px !important;
+      //   }
+      // }
+    }
+  
+    .tech-search-control {
+      margin-left: auto;
+      margin-right: 24px;
+      height: 32px;
+      margin-top: 16px;
+  
+      .tech-search-btn {
+        // width: 65px;
+        height: 32px;
+        padding: 0 16px;
+        margin: 0 0 0 16px;
+        line-height: 32px;
+        text-align: center;
+        border-radius: 2px;
+        // color: #ffffff;
+        // border: none;
+        font-size: 14px;
+  
+        .svgIcon {
+          transform: translateY(5px);
+        }
+      }
+    }
+}
+
+.tech-table {
+    margin-top: 16px;
+    margin-bottom: 32px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+  
+    // margin: 45px 0 0 0;
+    .tech-table-pagination {
+      margin: 10px 0 0 0;
+      float: right;
+    }
+  
+    .tech-table-btn {
+      width: 54px;
+      height: 32px;
+      border-radius: 3px;
+      padding: 0;
+      text-align: center;
+    }
+  
+    .tech-table-btn-four {
+      width: 78px;
+      height: 32px;
+      border-radius: 3px;
+      padding: 0;
+      text-align: center;
+    }
+  
+  }
+  
+  ::v-deep .tech-table-header {
+    background: #0F5FED;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    height: 48px;
+    text-align: center;
+    .cell {
+      color: #ffffff !important;
+      font-weight: 400;
+    }
+  }
+  
+  ::v-deep .tech-table .el-table__row--striped td {
+    background: #F5F6FD !important;
+  }
+  
+  ::v-deep .tech-table .el-table--striped .el-table__body tr .el-table__row--striped td {
+    background: #F5F6FD !important;
+}

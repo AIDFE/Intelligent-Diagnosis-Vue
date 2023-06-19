@@ -1,33 +1,38 @@
 <template>
-  <div class="upload-container">
-    <div class="upload-text">数据上传</div>
-    <div class="upload-fileimg">
-      <div class="upload-mask">
-        <div class="upload-rectangle" />
-      </div>
-      <div class="upload-oval">
-        <br>
-        <div />
+  <div>
+    <div class="tech-box">
+      <div class="tech-title">
+        <div class="tech-title-line" />
+        <div class="tech-title-text">数据上传</div>
       </div>
     </div>
-    <div class="upload-chosen">
-      <button class="upload-button">
-        <input id="filename" type="file" name="filename" multiple class="upload-visuallyhidden" @change="updateImageDisplay">
-        <label for="filename" class="upload-uploadbutton">上传文件</label>
-      </button>
-      <div class="upload-preview">
-        <p style="font-size:10px">未上传文件</p>
-      </div>
-      <div class="upload-confirm">
-        <button class="upload-button">
-          <a href="#"> 确认上传 </a>
-        </button>
-        <button class="upload-button">
-          <a href="#"> 取消 </a>
-        </button>
-      </div>
 
-    </div>
+    <el-card style="width:40%;margin: auto;">
+      <!-- TODO：这种上传方式不好，最好不要这样处理 -->
+      <div class="upload-fileimg">
+        <div class="upload-mask">
+          <div class="upload-rectangle" />
+        </div>
+        <div class="upload-oval">
+          <br>
+          <div />
+        </div>
+      </div>
+      <div class="upload-chosen">
+        <button class="upload-button">
+          <input id="filename" type="file" name="filename" multiple class="upload-visuallyhidden" @change="updateImageDisplay">
+          <label for="filename" class="upload-uploadbutton">上传文件</label>
+        </button>
+        <div class="upload-preview">
+          <p style="font-size:10px">未上传文件</p>
+        </div>
+        <div class="upload-confirm">
+          <button class="upload-button">
+            <a href="#"> 确认上传 </a>
+          </button>
+        </div>
+      </div>
+    </el-card>
 
   </div>
 </template>
@@ -115,9 +120,6 @@ export default {
 
 <style lang="scss" scoped>
 .upload {
-  &-container {
-    margin: 30px;
-  }
   &-tips {
     margin-top: 50px;
     margin-bottom: 5px;
@@ -136,6 +138,8 @@ export default {
   &-fileimg {
     width: 150px;
     margin: auto;
+    margin-top: -30px;
+    margin-bottom: 32px;
   }
   &-chosen {
     width: 100%;
