@@ -154,10 +154,11 @@
             </el-table-column>
           </el-table-column>
 
-          <el-table-column class-name="status-col" label="AI诊断结果" min-width="3" align="center">
+          <el-table-column class-name="status-col" label="AI诊断结果" min-width="2" align="center">
             <template slot-scope="scope">
               <div>脑侵袭：<el-tag :type="[scope.row.invasive==='否' ? 'success': 'danger']">{{ scope.row.invasive }}</el-tag></div> <br>
               <div>分级：<el-tag :type="[scope.row.level==='良性' ? 'success': 'danger']">{{ scope.row.level }}</el-tag></div>
+              <el-progress text-inside="true" :stroke-width="15" :percentage="100" style="margin-top: 25px;" />
             </template>
           </el-table-column>
 
@@ -289,7 +290,7 @@
             </template>
           </el-table-column>
 
-          <el-table-column class-name="status-col" label="是否一致" min-width="3" align="center">
+          <el-table-column class-name="status-col" label="是否一致" min-width="2" align="center">
             <template slot-scope="scope">
               <div>脑侵袭：<el-tag :type="[scope.row.consist_inv==='否' ? 'danger': 'success']">{{ scope.row.consist_inv }}</el-tag></div> <br>
               <div>分级：<el-tag :type="[scope.row.consist_lev==='否' ? 'danger': 'success']">{{ scope.row.consist_lev }}</el-tag></div>
