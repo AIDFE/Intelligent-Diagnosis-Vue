@@ -74,9 +74,9 @@ export const constantRoutes = [
     children: [
       {
         path: 'File-upload',
-        name: '上传文件',
+        name: '数据上传',
         component: () => import('@/views/File-upload/index'),
-        meta: { title: '上传文件', icon: 'table' }
+        meta: { title: '数据上传', icon: 'table' }
       }
     ]
   },
