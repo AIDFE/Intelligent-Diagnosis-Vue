@@ -120,6 +120,26 @@ export default {
           return false
         }
       })
+      // this.$axios({
+      //   method: 'post',
+      //   url: 'http://120.92.108.238:5051/login', // 接口地址
+      //   data: {
+      //     keyword: '1' // 传接口参数
+      //   }
+      // })
+      //   .then(response => {
+      //     console.log(response, 'success') // 成功的返回
+      //   })
+      //   .catch(error => console.log(error, 'error')) // 失败的返回
+
+      // this.$axios.post('http://120.92.108.238:5051/login', {
+      //   params: {
+      //     number: this.loginForm.username,
+      //     password: this.loginForm.password
+      // }
+      // }).then((res) => {
+      //   console.log(res)
+      // })
     }
   }
 }

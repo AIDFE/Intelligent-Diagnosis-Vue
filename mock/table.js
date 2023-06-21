@@ -11,7 +11,8 @@ const data = Mock.mock({
     f_num: '@integer(300, 5000)',
     'invasive|1': ['是', '否'],
     'level|1': ['良性', '非良性'],
-    'consist|1': ['是', '否'],
+    'consist_inv|1': ['是', '否'],
+    'consist_lev|1': ['是', '否'],
     device: '@string(2)',
     modality: '@integer(1,4)',
     slice: '@integer(100,300)'

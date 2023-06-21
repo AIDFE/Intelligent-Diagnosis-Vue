@@ -1,13 +1,18 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">在线智能诊断系统</div>
+    <!-- <div class="dashboard-text">在线智能诊断系统</div> -->
     <el-badge is-dot class="item"><font class="dashboard-tips">提示</font></el-badge>
-    <div class="dashboard-instructions">欢迎使用脑膜瘤智能分级诊断系统！本系统基于xx算法，可以快速准确地帮助您进行脑膜瘤的分级诊断。在使用本系统前，请您先仔细查看<el-link :underline="false" type="primary" style="font-size: 18px;line-height: 46px;margin-top: -3px;">使用指南</el-link>。</div>
+    <div class="dashboard-instructions">欢迎使用脑膜瘤智能分级诊断系统！本系统基于xx算法，可以快速准确地帮助您进行脑膜瘤的分级诊断。在使用本系统前，请您先仔细查看
+      <el-link :underline="false" type="primary" style="font-size: 18px;line-height: 46px;margin-top: -3px;" @click.native="visGuide()">使用指南</el-link>。</div>
     <div class="dashboard-instructions">如有任何疑问，欢迎随时联系我们的运营人员。祝您健康！</div>
-    <!-- <hr color="gray" size="5"> -->
+
+    <el-dialog title="使用指南" :visible.sync="dialogTableVisible" center :append-to-body="true" :lock-scroll="false" width="30%">
+
+      <Add />
+    </el-dialog>
     <el-divider><i class="el-icon-s-opportunity" /></el-divider>
 
-    <el-row :gutter="520" style="margin-top:48px;">
+    <el-row :gutter="100" style="margin-top:48px;">
       <el-col :span="12">
         <el-card shadow="hover" style="width: 100%;">
           <div slot="header">
@@ -42,10 +47,20 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Dashboard',
+  data() {
+    return {
+      dialogTableVisible: false
+    }
+  },
   computed: {
     ...mapGetters([
       'name'
     ])
+  },
+  methods: {
+    visGuide() {
+      this.dialogTableVisible = true// 默认页面不显示为false,点击按钮将这个属性变成true
+    }
   }
 }
 </script>

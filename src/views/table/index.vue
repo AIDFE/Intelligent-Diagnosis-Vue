@@ -14,12 +14,13 @@
             size="small"
             class="tech-search-item-input"
             placeholder="请输入姓名"
+            clearable
           />
         </div>
         <div class="tech-search-item">
           <div class="tech-search-item-text">日期</div>
           <el-date-picker
-            v-model="datasel"
+            v-model="datesel"
             type="daterange"
             range-separator="至"
             start-placeholder="开始日期"
@@ -101,8 +102,10 @@
           :data="filteredData"
           element-loading-text="加载中"
           header-cell-class-name="tech-table-header"
-          border
+          border="true"
           highlight-current-row
+          :row-class-name="tableRowClassName"
+          :header-cell-style="{background:'#f0f8ff',color:'#606266'}"
           @selection-change="handleSelectionChange"
         >
 
@@ -131,10 +134,10 @@
               <div>年龄：{{ scope.row.age }} 性别：{{ scope.row.sex }}</div>
               <div>出生年月：{{ scope.row.bdate }} <br>
                 检查日期：{{ scope.row.cdate }}</div>
-              <div>主诉：<el-input v-model="scope.row.vig" size="mini" placeholder="请输入" style="width: 60%;" /></div>
-              <div>备注：<el-input v-model="scope.row.vig" size="mini" placeholder="请输入" style="width: 60%;" /></div>
-              <el-divider />
-              <div><el-button type="primary" size="small">上传</el-button></div>
+              <div>主诉：<el-input v-model="scope.row.cheif" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
+              <div>备注：<el-input v-model="scope.row.remark" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
+              <!-- <el-divider /> -->
+              <!-- <div><el-button type="primary" size="small">上传</el-button></div> -->
             </template>
           </el-table-column>
 
@@ -144,7 +147,7 @@
                 <template slot-scope="scope">
                   {{ scope.row.device }} <el-divider /> {{ scope.row.modality }} <el-divider /> {{ scope.row.slice }} <el-divider />
 
-                  <div><el-button type="text" size="small">查看图片</el-button></div>
+                  <div><el-button type="text" size="medium">查看图片</el-button></div>
 
                 </template>
               </el-table-column>
@@ -217,9 +220,9 @@
                   />
                 </el-select>
               </div>
-              <el-divider />
+              <!-- <el-divider /> -->
               <div>
-                <el-button type="primary" size="small">上传</el-button>
+                <!-- <el-button type="primary" size="small">上传</el-button> -->
               </div>
             </template>
           </el-table-column>
@@ -280,21 +283,27 @@
                     :value="item.value"
                   />
                 </el-select></div>
-              <el-divider />
-              <div><el-button type="primary" size="small">上传</el-button></div>
+              <!-- <el-divider /> -->
+              <!-- <div><el-button type="primary" size="small">上传</el-button></div> -->
 
             </template>
           </el-table-column>
 
-          <el-table-column align="center" prop="created_at" label="是否一致" min-width="2">
+          <el-table-column class-name="status-col" label="是否一致" min-width="3" align="center">
             <template slot-scope="scope">
-              <el-tag :type="[scope.row.consist==='否' ? 'danger': 'success']">{{ scope.row.consist }}</el-tag>
+              <div>脑侵袭：<el-tag :type="[scope.row.consist_inv==='否' ? 'danger': 'success']">{{ scope.row.consist_inv }}</el-tag></div> <br>
+              <div>分级：<el-tag :type="[scope.row.consist_lev==='否' ? 'danger': 'success']">{{ scope.row.consist_lev }}</el-tag></div>
             </template>
+          </el-table-column>
+
+          <el-table-column class-name="status-col" label="保存信息" min-width="2" align="center">
+            <el-button class="tech-search-btn" type="primary" size="small" @click="info_save"> 保存 </el-button> <br>
+            <el-button class="tech-search-btn" size="small" style="margin-top: 20px;" @click="info_reset"> 重置 </el-button>
           </el-table-column>
 
         </el-table>
-        <!-- 列表不要分页吗？ -->
-        <!-- <el-pagination
+        <!-- 列表分页 -->
+        <el-pagination
           class="tech-table-pagination"
           :current-page.sync="currentPage"
           :page-sizes="[10, 50, 150, 200]"
@@ -303,7 +312,7 @@
           :total="totalPages"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
-        /> -->
+        />
 
       </div>
     </div>
@@ -332,10 +341,12 @@ export default {
       list: null,
       filterText: '',
       listLoading: true,
-      datasel: '',
+      datesel: '',
       sel_bingli: '',
       sel_inverse: '',
       sel_level: '',
+      cheif: '',
+      remark: '',
       p_inv_op: [
         { value: '选项1', label: '是' },
         { value: '选项2', label: '否' }],
@@ -385,6 +396,13 @@ export default {
     this.fetchData()
   },
   methods: {
+    // 改变斑马线的颜色
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex % 2 === 1) {
+        return 'row-style'
+      }
+      return ''
+    },
     fetchData() {
       this.listLoading = true
       getList().then(response => {
@@ -397,14 +415,29 @@ export default {
       // 多选时怎么处理
     },
     deleteBatch() {
-      var d = this.list
-      this.$refs.multipleTable.selection.forEach((Ele, index) => {
-        for (var i = 0; i < d.length; i++) {
-          var t = d[i].name
-          if (t === Ele.name) {
-            d.splice(i, 1)
+      this.$confirm('此操作将永久删除文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        var d = this.list
+        this.$refs.multipleTable.selection.forEach((Ele, index) => {
+          for (var i = 0; i < d.length; i++) {
+            var t = d[i].name
+            if (t === Ele.name) {
+              d.splice(i, 1)
+            }
           }
-        }
+        })
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     },
     search() {
@@ -412,6 +445,11 @@ export default {
     },
     reset() {
       // 清空搜索项，重新调用查询接口
+      this.filterText = ''
+      this.datesel = ''
+      this.sel_bingli = ''
+      this.sel_inverse = ''
+      this.sel_level = ''
     }
   }
 
@@ -425,4 +463,9 @@ export default {
     width: 100%;
     margin: 8px 0px;
 }
+
+::v-deep .el-table .row-style {
+   background: #f6fefd;
+ }
+
 </style>

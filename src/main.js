@@ -14,6 +14,8 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import axios from './axios'
+Vue.prototype.$axios = axios // 全局注册，使用方法为:this.$axios
 
 /**
  * If you don't want to use mock-server
