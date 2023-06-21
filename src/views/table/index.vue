@@ -467,7 +467,10 @@ export default {
       row.p_sub = ''
     },
     info_save(row) {
-
+      this.$message({
+        message: '保存成功',
+        type: 'success'
+      })
     }
   }
 
