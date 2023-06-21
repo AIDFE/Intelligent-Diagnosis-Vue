@@ -166,7 +166,7 @@
               <div style="display: flex;width:100%;">
                 <div style="width:40%">手术日期：</div>
                 <el-date-picker
-                  v-model="scope.row.data"
+                  v-model="scope.row.date"
                   type="date"
                   placeholder="选择日期"
                   size="mini"
@@ -297,8 +297,10 @@
           </el-table-column>
 
           <el-table-column class-name="status-col" label="保存信息" min-width="2" align="center">
-            <el-button class="tech-search-btn" type="primary" size="small" @click="info_save"> 保存 </el-button> <br>
-            <el-button class="tech-search-btn" size="small" style="margin-top: 20px;" @click="info_reset"> 重置 </el-button>
+            <template slot-scope="scope">
+              <el-button class="tech-search-btn" type="primary" size="small" @click="info_save(scope.row)"> 保存 </el-button> <br>
+              <el-button class="tech-search-btn" size="small" style="margin-top: 20px;" @click="info_reset(scope.row)"> 重置 </el-button>
+            </template>
           </el-table-column>
 
         </el-table>
@@ -450,6 +452,21 @@ export default {
       this.sel_bingli = ''
       this.sel_inverse = ''
       this.sel_level = ''
+    },
+    info_reset(row) {
+      row.cheif = ''
+      row.remark = ''
+      row.region = ''
+      row.date = ''
+      row.zhuw = ''
+      row.xinp = ''
+      row.p_invasive = ''
+      row.p_level = ''
+      row.p_vig = ''
+      row.p_sub = ''
+    },
+    info_save(row) {
+
     }
   }
 
