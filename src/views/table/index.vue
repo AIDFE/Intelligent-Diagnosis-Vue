@@ -99,7 +99,7 @@
         <el-table
           ref="multipleTable"
           v-loading="listLoading"
-          :data="filteredData"
+          :data="filteredData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
           element-loading-text="加载中"
           header-cell-class-name="tech-table-header"
           border="true"
@@ -307,12 +307,13 @@
         </el-table>
         <!-- 列表分页 -->
         <el-pagination
+          background
           class="tech-table-pagination"
           :current-page.sync="currentPage"
-          :page-sizes="[10, 50, 150, 200]"
-          :page-size="pageSizeNum"
+          :page-size="pagesize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="totalPages"
+          :total="30"
+          style="margin-top: 20px;"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
@@ -350,6 +351,8 @@ export default {
       sel_level: '',
       cheif: '',
       remark: '',
+      pagesize: 10, // 指定展示多少条
+      currentPage: 1, // 当前页码
       p_inv_op: [
         { value: '选项1', label: '是' },
         { value: '选项2', label: '否' }],
@@ -471,6 +474,13 @@ export default {
         message: '保存成功',
         type: 'success'
       })
+    },
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage
+    },
+    handleSizeChange: function(pagesize) { // 每页条数切换
+      this.pagesize = pagesize
+      this.handleCurrentChange(this.currentPage)
     }
   }
 
