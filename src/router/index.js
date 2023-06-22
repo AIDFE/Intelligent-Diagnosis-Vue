@@ -33,6 +33,9 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/login',
+    meta: {
+      roles: ['admin', 'editor']
+    },
     component: () => import('@/views/login/index'),
     hidden: true
   },
@@ -51,21 +54,8 @@ export const constantRoutes = [
       path: 'dashboard',
       name: '主页',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '主页', icon: 'dashboard' }
+      meta: { title: '主页', icon: 'dashboard', roles: ['admin', 'editor'] }
     }]
-  },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/',
-    children: [
-      {
-        path: 'table',
-        name: '病例列表',
-        component: () => import('@/views/table/index'),
-        meta: { title: '病例列表', icon: 'el-icon-s-help' }
-      }]
   },
   {
     path: '/',
@@ -76,35 +66,10 @@ export const constantRoutes = [
         path: 'File-upload',
         name: '数据上传',
         component: () => import('@/views/File-upload/index'),
-        meta: { title: '数据上传', icon: 'table' }
+        meta: { title: '数据上传', icon: 'table', roles: ['admin', 'editor'] }
       }
     ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: '添加用户',
-        component: () => import('@/views/form/index'),
-        meta: { title: '添加用户', icon: 'form' }
-      }
-    ]
-  },
-  {
-    path: '/normal',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: '普通用户',
-        component: () => import('@/views/normal/index'),
-        meta: { title: '普通用户', icon: 'form' }
-      }
-    ]
-  },
+  }
   // {
   //   path: '/imageAnalyse',
   //   component: Layout,
@@ -159,6 +124,45 @@ export const constantRoutes = [
   // ]
   // },
   // 404 page must be placed at the end !!!
+]
+
+export const asyncRoutes = [
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/',
+    children: [
+      {
+        path: 'table',
+        name: '病例列表',
+        component: () => import('@/views/table/index'),
+        meta: { title: '病例列表', icon: 'el-icon-s-help', roles: ['admin'] }
+      }]
+  },
+  {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: '添加用户',
+        component: () => import('@/views/form/index'),
+        meta: { title: '添加用户', icon: 'form', roles: ['admin'] }
+      }
+    ]
+  },
+  {
+    path: '/normal',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: '普通用户',
+        component: () => import('@/views/normal/index'),
+        meta: { title: '病例列表', icon: 'form', roles: ['editor'] }
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 
