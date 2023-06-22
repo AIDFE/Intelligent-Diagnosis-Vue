@@ -94,14 +94,14 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/imageAnalyse',
+    path: '/normal',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: '图像分析',
-        component: () => import('@/views/imageAnalyse/index'),
-        meta: { title: '图像分析', icon: 'form' }
+        name: '普通用户',
+        component: () => import('@/views/normal/index'),
+        meta: { title: '普通用户', icon: 'form' }
       }
     ]
   },
