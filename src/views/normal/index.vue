@@ -85,7 +85,7 @@
                 <template slot-scope="scope">
                   {{ scope.row.device }} <el-divider /> {{ scope.row.modality }} <el-divider /> {{ scope.row.slice }} <el-divider />
 
-                  <div><el-button type="text" size="medium">查看图片</el-button></div>
+                  <div><el-button type="text" size="medium" @click="handle(scope.row.url_view)">查看图片</el-button></div>
 
                 </template>
               </el-table-column>
@@ -277,6 +277,9 @@ export default {
     handleSizeChange: function(pagesize) { // 每页条数切换
       this.pagesize = pagesize
       this.handleCurrentChange(this.currentPage)
+    },
+    handle(url) {
+      window.open(url, '_parent', 'width=400, height=700, top=100, left=100')
     }
   }
 

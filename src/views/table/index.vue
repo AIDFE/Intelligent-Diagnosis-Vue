@@ -136,8 +136,6 @@
                 检查日期：{{ scope.row.cdate }}</div>
               <div>主诉：<el-input v-model="scope.row.cheif" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
               <div>备注：<el-input v-model="scope.row.remark" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
-              <!-- <el-divider /> -->
-              <!-- <div><el-button type="primary" size="small">上传</el-button></div> -->
             </template>
           </el-table-column>
 
@@ -147,7 +145,7 @@
                 <template slot-scope="scope">
                   {{ scope.row.device }} <el-divider /> {{ scope.row.modality }} <el-divider /> {{ scope.row.slice }} <el-divider />
 
-                  <div><el-button type="text" size="medium">查看图片</el-button></div>
+                  <div><el-button type="text" size="medium" @click="handle(scope.row.url_view)">查看图片</el-button></div>
 
                 </template>
               </el-table-column>
@@ -481,6 +479,9 @@ export default {
     handleSizeChange: function(pagesize) { // 每页条数切换
       this.pagesize = pagesize
       this.handleCurrentChange(this.currentPage)
+    },
+    handle(url) {
+      window.open(url, '_parent')
     }
   }
 
