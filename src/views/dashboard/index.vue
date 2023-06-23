@@ -19,8 +19,7 @@
             <span>快捷查看病例列表入口</span>
           </div>
           <div class="dashboard-chosen">
-            <button class="dashboard-button">
-              <router-link to="/example/table" style="color:rgba(255,255,255,1)">查看病例<br></router-link>
+            <button class="dashboard-button" style="color:rgba(255,255,255,1); font-size:20px" @click="clickHere()">查看病例<br>
             </button>
           </div>
         </el-card>
@@ -32,7 +31,7 @@
           </div>
           <div class="dashboard-chosen">
             <button class="dashboard-button" style="background-color:#67C23A">
-              <router-link to="/File-upload" style="color:rgba(255,255,255,1)">上传数据<br></router-link>
+              <router-link to="/File-upload" style="color:rgba(255,255,255,1)">数据上传<br></router-link>
             </button>
           </div>
         </el-card>
@@ -60,9 +59,15 @@ export default {
   methods: {
     visGuide() {
       this.dialogTableVisible = true// 默认页面不显示为false,点击按钮将这个属性变成true
+    },
+    clickHere: function() {
+      this.$router.push({ name: '病例列表' })
     }
+
   }
+
 }
+
 </script>
 
 <style lang="scss" scoped>

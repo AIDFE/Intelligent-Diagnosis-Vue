@@ -17,7 +17,7 @@ import Layout from '@/layout'
  * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
  * name:'router-name'             the name is used by <keep-alive> (must set!!!)
  * meta : {
-    roles: ['admin','editor']    control the page roles (you can set multiple roles)
+    roles: ['admin','user']    control the page roles (you can set multiple roles)
     title: 'title'               the name show in sidebar and breadcrumb (recommend set)
     icon: 'svg-name'/'el-icon-x' the icon show in the sidebar
     breadcrumb: false            if set false, the item will hidden in breadcrumb(default is true)
@@ -34,7 +34,7 @@ export const constantRoutes = [
   {
     path: '/login',
     meta: {
-      roles: ['admin', 'editor']
+      roles: ['admin', 'user']
     },
     component: () => import('@/views/login/index'),
     hidden: true
@@ -54,7 +54,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: '主页',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '主页', icon: 'dashboard', roles: ['admin', 'editor'] }
+      meta: { title: '主页', icon: 'dashboard', roles: ['admin', 'user'] }
     }]
   },
   {
@@ -66,64 +66,10 @@ export const constantRoutes = [
         path: 'File-upload',
         name: '数据上传',
         component: () => import('@/views/File-upload/index'),
-        meta: { title: '数据上传', icon: 'table', roles: ['admin', 'editor'] }
+        meta: { title: '数据上传', icon: 'table', roles: ['admin', 'user'] }
       }
     ]
   }
-  // {
-  //   path: '/imageAnalyse',
-  //   component: Layout,
-  //   redirect: '/imageAnalyse',
-  //   children: [
-  //     {
-  //       path: 'imageAnalyse',
-  //       component: () => import('@/views/imageAnalyse/index'), // Parent router-view
-  //       name: '图像分析',
-  //       meta: { title: '图像分析', icon: 'nested' }
-  //   children: [
-  //     {
-  //       path: 'menu1-1',
-  //       component: () => import('@/views/nested/menu1/menu1-1'),
-  //       name: 'Menu1-1',
-  //       meta: { title: 'Menu1-1' }
-  //     },
-  //     {
-  //       path: 'menu1-2',
-  //       component: () => import('@/views/nested/menu1/menu1-2'),
-  //       name: 'Menu1-2',
-  //       meta: { title: 'Menu1-2' },
-  //       children: [
-  //         {
-  //           path: 'menu1-2-1',
-  //           component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-  //           name: 'Menu1-2-1',
-  //           meta: { title: 'Menu1-2-1' }
-  //         },
-  //         {
-  //           path: 'menu1-2-2',
-  //           component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-  //           name: 'Menu1-2-2',
-  //           meta: { title: 'Menu1-2-2' }
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       path: 'menu1-3',
-  //       component: () => import('@/views/nested/menu1/menu1-3'),
-  //       name: 'Menu1-3',
-  //       meta: { title: 'Menu1-3' }
-  //     }
-  //   ]
-  // },
-  // {
-  //   path: 'menu2',
-  //   component: () => import('@/views/nested/menu2/index'),
-  //   name: 'Menu2',
-  //   meta: { title: 'menu2' }
-  // }
-  // ]
-  // },
-  // 404 page must be placed at the end !!!
 ]
 
 export const asyncRoutes = [
@@ -151,15 +97,18 @@ export const asyncRoutes = [
       }
     ]
   },
+  { path: '*', redirect: '/404', hidden: true }]
+
+export const UserRoutes = [
   {
     path: '/normal',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: '普通用户',
+        name: '病例列表',
         component: () => import('@/views/normal/index'),
-        meta: { title: '病例列表', icon: 'form', roles: ['editor'] }
+        meta: { title: '病例列表', icon: 'form', roles: ['user'] }
       }
     ]
   },
