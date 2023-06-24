@@ -1,68 +1,81 @@
 <template>
-  <div>
-    <div class="tech-box">
-      <div class="tech-title">
-        <div class="tech-title-line" />
-        <div class="tech-title-text">数据上传</div>
-      </div>
-    </div>
-
-    <el-upload
-      class="upload-demo"
-      drag
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :data="uploadData"
-      multiple
-      :on-exceed="handleExceed"
-      :on-error="uploadError"
-      :on-success="uploadSuccess"
-      :on-remove="onRemoveTxt"
-      :before-upload="onBeforeUpload"
-      :file-list="files"
-    >
+  <uploader :options="options" class="uploader-example" :file-status-text="statusText">
+    <uploader-unsupport />
+    <uploader-drop>
       <i class="el-icon-upload" />
-      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-    </el-upload>
+      <p style="margin-left: 150px; font-size: 15px; color: gray;">温馨提示：可拖拽文件上传或点击下方按钮上传</p>
 
-  </div>
+    </uploader-drop>
+    <uploader-btn>选择文件</uploader-btn>
+    <uploader-btn :directory="true">选择文件夹</uploader-btn>
+    <uploader-list />
+  </uploader>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
-  name: 'Upload',
   data() {
     return {
-      uploadData: ''
+      options: {
+        target: 'https://jsonplaceholder.typicode.com/posts/',
+        testChunks: false
+      },
+      // 上传状态
+      statusText: {
+        success: '上传成功',
+        error: '上传失败',
+        uploading: '上传中...',
+        paused: '等待中...',
+        waiting: '等待中...'
+      }
     }
-  },
-  computed: {
-    ...mapGetters([
-      'name'
-    ])
   }
 }
-
 </script>
 
-<style lang="scss" scoped>
-.upload-demo ::v-deep .el-upload-dragger{
-  height:400px;
-  width:800px;
-  margin-left: 300px;
-  position:absolute;
+<style >
+  .uploader-example {
+    width: 660px;
+    height: 480px;
+    padding: 15px;
+    margin: 40px auto 0;
+    font-size: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+  }
+  .uploader-example .uploader-btn {
+    margin-top: 15px;
+    font-weight: bold;
+    border: none;
+    color: white;
+    padding: 0.5em;
+    border-radius: 3px;
+    background-color: #409EFF;
+    margin-right: 15px;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    line-height: 23px;
+    text-align: center;
 
-}
+  }
+  .uploader-example .uploader-list {
+    margin-top: 25px;
+    max-height: 440px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .uploader-drop{
+    height: 400px;
+  }
+  .el-icon-upload{
+    font-size: 200px;
+    color: #C5C2C2;
+    margin-top: 50px;
+    margin-left: 200px;
 
-.upload-demo ::v-deep .el-icon-upload{
-  margin-top: 100px;
-  height:100px;
-  width:100px;}
-
-.upload-demo ::v-deep .el-upload-list{
-  margin-top: 400px;
-  width:800px;
-  margin-left: 300px;
-}
+  }
+  .info{
+    margin-top:50px
+  }
 </style>

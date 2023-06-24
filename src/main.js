@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
@@ -15,6 +14,7 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 import axios from './axios'
+import uploader from 'vue-simple-uploader'
 Vue.prototype.$axios = axios // 全局注册，使用方法为:this.$axios
 
 /**
@@ -34,7 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 Vue.use(ElementUI)
-
+Vue.use(uploader)
 Vue.config.productionTip = false
 
 new Vue({
