@@ -188,7 +188,7 @@
                   />
                 </el-select></div>
               <div style="display: flex;width:100%;">
-                <div style="width:40%">蛛网膜隔离：</div>
+                <div style="width:40%">蛛网膜界面破坏：</div>
                 <el-select
                   v-model="scope.row.zhuw"
                   size="mini"
@@ -383,7 +383,14 @@ export default {
         { value: '选项3', label: '三级' },
         { value: '选项4', label: '四级' }],
       p_region: [
-        { value: '选项1', label: '无' }],
+        { value: '选项1', label: '凸面' },
+        { value: '选项2', label: '窦旁' },
+        { value: '选项3', label: '镰旁' },
+        { value: '选项4', label: '前颅底' },
+        { value: '选项5', label: '中颅底' },
+        { value: '选项6', label: '后颅窝' },
+        { value: '选项7', label: '侧脑室' },
+        { value: '选项8', label: '其他' }],
       searchText: '',
       multipleSelection: [] }
   },

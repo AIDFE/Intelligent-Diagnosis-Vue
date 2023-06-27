@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       options: {
-        target: 'https://jsonplaceholder.typicode.com/posts/',
+        target: '/api/uploadfile',
         testChunks: false
       },
       // 上传状态
