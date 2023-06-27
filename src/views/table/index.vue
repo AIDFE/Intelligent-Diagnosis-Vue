@@ -145,7 +145,7 @@
                 <template slot-scope="scope">
                   {{ scope.row.device }} <el-divider /> {{ scope.row.modality }} <el-divider /> {{ scope.row.slice }} <el-divider />
 
-                  <div><el-button type="text" size="medium" @click="handle(scope.row.url_view)">查看图片</el-button></div>
+                  <div><el-button type="text" size="medium" @click="handle(scope.row.url_view)">查看图像</el-button></div>
 
                 </template>
               </el-table-column>

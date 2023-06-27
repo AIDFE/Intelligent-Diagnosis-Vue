@@ -263,14 +263,13 @@ img {
   // .title-container {
   //   position: relative;
 
-  //   .title {
-  //     font-size: 26px;
-  //     color: $light_gray;
-  //     margin: 0px auto 40px auto;
-  //     text-align: center;
-  //     font-weight: bold;
-  //   }
-  // }
+    // .title {
+    //   font-size: 26px;
+    //   color: $light_gray;
+    //   margin: 0px auto 40px auto;
+    //   text-align: center;
+    //   font-weight: bold;
+    // }
 
   .show-pwd {
     position: absolute;

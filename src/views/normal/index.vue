@@ -57,49 +57,96 @@
           @selection-change="handleSelectionChange"
         >
 
-          <el-table-column
+          <!-- <el-table-column
             align="center"
             label="ID"
             min-width="2"
-          >
-            <el-table-column align="center" label="患者姓名" min-width="2">
+          > -->
+          <!-- <el-table-column align="center" label="患者姓名" min-width="2">
               <el-table-column label="F号" min-width="1" align="center">
                 <template slot-scope="scope">
                   {{ scope.$index }} <el-divider /> {{ scope.row.name }} <el-divider /> {{ scope.row.f_num }}
                 </template>
               </el-table-column>
             </el-table-column>
-          </el-table-column>
+          </el-table-column> -->
 
           <el-table-column label="患者临床信息" min-width="4" align="center">
-            <template slot-scope="scope">
-              <div>年龄：{{ scope.row.age }} 性别：{{ scope.row.sex }}</div>
-              <div>出生年月：{{ scope.row.bdate }} <br>
-                检查日期：{{ scope.row.cdate }}</div>
-            </template>
+            <el-table-column align="center" label="ID" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.$index }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="患者姓名" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.name }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="F号" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.f_num }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="年龄" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.age }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="性别" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.sex }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="出生年月" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.bdate }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="检查日期" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.cdate }}
+              </template>
+            </el-table-column>
           </el-table-column>
 
-          <el-table-column label="成像设备" min-width="1" align="center">
-            <el-table-column align="center" label="模态个数" min-width="2">
-              <el-table-column align="center" label="切片个数" min-width="2">
-                <template slot-scope="scope">
-                  {{ scope.row.device }} <el-divider /> {{ scope.row.modality }} <el-divider /> {{ scope.row.slice }} <el-divider />
-
-                  <div><el-button type="text" size="medium" @click="handle(scope.row.url_view)">查看图片</el-button></div>
-
-                </template>
-              </el-table-column>
+          <el-table-column label="成像信息" min-width="3" align="center">
+            <el-table-column align="center" label="成像设备" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.device }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="模态个数" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.modality }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="切片个数" min-width="1">
+              <template slot-scope="scope">
+                {{ scope.row.slice }}
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="图像查看" min-width="1">
+              <template slot-scope="scope">
+                <el-button type="text" size="medium" @click="handle(scope.row.url_view)">查看图像</el-button>
+              </template>
             </el-table-column>
           </el-table-column>
 
           <el-table-column class-name="status-col" label="AI诊断结果" min-width="1" align="center">
-            <template slot-scope="scope">
-              <div>脑侵袭：<el-tag :type="[scope.row.invasive==='否' ? 'success': 'danger']">{{ scope.row.invasive }}</el-tag></div> <br>
-              <div>分级：<el-tag :type="[scope.row.level==='良性' ? 'success': 'danger']">{{ scope.row.level }}</el-tag></div>
-              <el-progress text-inside="true" :stroke-width="15" :percentage="100" style="margin-top: 25px;" />
-            </template>
+            <el-table-column align="center" label="脑侵袭" min-width="1">
+              <template slot-scope="scope">
+                <el-tag :type="[scope.row.invasive==='否' ? 'success': 'danger']">{{ scope.row.invasive }}</el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="分级" min-width="1">
+              <template slot-scope="scope">
+                <el-tag :type="[scope.row.level==='良性' ? 'success': 'danger']">{{ scope.row.level }}</el-tag>
+              </template>
+            </el-table-column>
+            <el-table-column align="center" label="预测进度" min-width="1">
+              <el-progress text-inside="true" :stroke-width="15" :percentage="100" />
+            </el-table-column>
           </el-table-column>
-
         </el-table>
         <!-- 列表分页 -->
         <el-pagination
