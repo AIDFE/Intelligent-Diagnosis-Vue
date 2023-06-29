@@ -1,5 +1,8 @@
+
 <template>
+
   <div>
+
     <div class="tech-box">
       <div class="tech-title">
         <div class="tech-title-line" />
@@ -318,7 +321,6 @@
 
       </div>
     </div>
-
   </div>
 </template>
 
@@ -506,5 +508,10 @@ export default {
 ::v-deep .el-table .row-style {
    background: #f6fefd;
  }
+
+ .wrap {
+  height: 100%;
+  overflow-x: hidden;
+}
 
 </style>

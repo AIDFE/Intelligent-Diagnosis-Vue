@@ -121,19 +121,6 @@ export default {
           return false
         }
       })
-      // this.$axios({
-      //   method: 'post',
-      //   url: 'http://127.0.0.1:5051/login', // 接口地址
-      //   data: {
-      //     number: this.loginForm.username,
-      //     password: this.loginForm.password
-      //   }
-      // })
-      //   .then(response => {
-      //     console.log(response, 'success') // 成功的返回
-      //   })
-      //   .catch(error => console.log(error, 'error')) // 失败的返回
-
       axios.get('/api/login', {
         params: {
           username: this.loginForm.username,

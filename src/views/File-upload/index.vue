@@ -4,11 +4,18 @@
     <uploader-drop>
       <i class="el-icon-upload" />
       <p style="margin-left: 150px; font-size: 15px; color: gray;">温馨提示：可拖拽文件上传或点击下方按钮上传</p>
+      <p style="margin-left: 150px; font-size: 15px; color: gray;">请上传患者的dicom文件或文件夹</p>
 
     </uploader-drop>
     <uploader-btn>选择文件</uploader-btn>
     <uploader-btn :directory="true">选择文件夹</uploader-btn>
     <uploader-list />
+    <el-alert
+      title="文件上传成功"
+      type="success"
+      description="正在进行图像分析，请前往病例列表查看患者信息及分析结果"
+      show-icon
+    />
   </uploader>
 </template>
 
@@ -77,5 +84,8 @@ export default {
   }
   .info{
     margin-top:50px
+  }
+  ::v-deep.el-alert{
+    font-size: 100px;
   }
 </style>
