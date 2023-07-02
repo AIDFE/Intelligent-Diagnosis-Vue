@@ -13,10 +13,10 @@
           <el-input v-model="form.name" />
         </el-form-item>
         <el-form-item label="设置密码" prop="password">
-          <el-input v-model="form.passward" show-password />
+          <el-input v-model="form.password" show-password />
         </el-form-item>
         <el-form-item label="用户类别">
-          <el-radio-group v-model="form.resource">
+          <el-radio-group v-model="form.access">
             <el-radio label="高级用户" />
             <el-radio label="普通用户" />
           </el-radio-group>
@@ -30,33 +30,40 @@
 </template>
 
 <script>
+import {regeisted} from '@/api/user'
 export default {
   data() {
     return {
       form: {
         name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        access: '',
+        password: ''
       }
     }
   },
   methods: {
     onSubmit() {
-      this.$message('提交!')
-    },
+      regeisted(this.form).then(res => {
+          console.log(res)
+          if (res.code === 20000){
+            this.$message({
+            message: '注册成功',
+            type: 'success'
+        })}
+  })
+
+},
     reset() {
       this.$message({
         message: '重置表单',
         type: 'warning'
       })
-    }
-  }
-}
+      this.form.name = ''
+      this.form.resource = ''
+      this.form.password = ''
+    },
+    }}
+
 </script>
 
 <style scoped>

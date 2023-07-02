@@ -1,5 +1,5 @@
 <template>
-  <uploader :options="options" class="uploader-example" :file-status-text="statusText">
+  <uploader :options="options" @file-success="onFileSuccess"   @file-complete="onFileComplete"  @file-error="onFileError" class="uploader-example" :file-status-text="statusText" ref="uploader">
     <uploader-unsupport />
     <uploader-drop>
       <i class="el-icon-upload" />
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import {getSeg} from '@/api/seg'
 export default {
   data() {
     return {
@@ -36,8 +37,35 @@ export default {
         waiting: '等待中...'
       }
     }
+  },
+
+  methods: {
+    // onFileSuccess: function (rootFile, file, message, chunk) {
+    //   console.log(`文件: ${file.name} 上传成功`)
+    // },
+    onFileComplete: function (rootFile) {
+      this.$message({
+            message: '文件上传成功, 图像正在分析中...请前往病例列表查看',
+            type: 'success'
+        })
+        getSeg("9b42b32e-8d6d1704-cbb1a4b8-b172a8db-58db2590", "1.2.840.113564.345052603883.10332.635963047556560213.29").then(res => {
+          console.log(res)
+        //   if (res.code === 20000){
+        //     this.$message({
+        //     message: '注册成功',
+        //     type: 'success'
+        // })}
+  })
+
+    },
+    onFileError: function (rootFile, file, message, chunk) {
+      this.$message({
+            message: '文件上传出错，请重新上传',
+            type: 'error'
+        })
+    },
   }
-}
+  }
 </script>
 
 <style >
@@ -47,7 +75,7 @@ export default {
     padding: 15px;
     margin: 40px auto 0;
     font-size: 12px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .4);
+    box-shadow: 0 0 10px rgba(102, 87, 87, 0.4);
   }
   .uploader-example .uploader-btn {
     margin-top: 15px;

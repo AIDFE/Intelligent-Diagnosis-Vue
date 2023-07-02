@@ -19,7 +19,6 @@ router.beforeEach(async (to, from, next) => {
 
   // determine whether the user has logged in
   const hasToken = getToken()
-
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
@@ -32,9 +31,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           // 获取用户信息
-
           const { roles } = await store.dispatch('user/getInfo')
-
           const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
 
           router.addRoutes(accessRoutes)

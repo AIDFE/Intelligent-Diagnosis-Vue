@@ -126,19 +126,19 @@
             <el-table-column align="center" label="患者姓名" min-width="2">
               <el-table-column label="F号" min-width="2" align="center">
                 <template slot-scope="scope">
-                  {{ scope.$index }} <el-divider /> {{ scope.row.name }} <el-divider /> {{ scope.row.f_num }}
+                  {{ scope.row.study_info.id }} <el-divider /> {{ scope.row.study_info.name }} <el-divider /> {{ scope.row.study_info.f_num }}
                 </template>
               </el-table-column>
             </el-table-column>
           </el-table-column>
 
-          <el-table-column label="患者临床信息" min-width="4" align="center">
+         <el-table-column label="患者临床信息" min-width="4" align="center">
             <template slot-scope="scope">
-              <div>年龄：{{ scope.row.age }} 性别：{{ scope.row.sex }}</div>
-              <div>出生年月：{{ scope.row.bdate }} <br>
-                检查日期：{{ scope.row.cdate }}</div>
-              <div>主诉：<el-input v-model="scope.row.cheif" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
-              <div>备注：<el-input v-model="scope.row.remark" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
+              <div>年龄：{{ scope.row.study_info.age }} 性别：{{ scope.row.study_info.sex }}</div>
+              <div>出生年月：{{ scope.row.study_info.bdate }} <br>
+                检查日期：{{ scope.row.study_info.cdate }}</div>
+              <div>主诉：<el-input v-model="scope.row.clinic_info.cheif" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
+              <div>备注：<el-input v-model="scope.row.clinic_info.remark" type="textarea" :rows="1" size="mini" placeholder="请输入" style="width: 60%;" /></div>
             </template>
           </el-table-column>
 
@@ -146,9 +146,9 @@
             <el-table-column align="center" label="模态个数" min-width="2">
               <el-table-column align="center" label="切片个数" min-width="2">
                 <template slot-scope="scope">
-                  {{ scope.row.device }} <el-divider /> {{ scope.row.modality }} <el-divider /> {{ scope.row.slice }} <el-divider />
+                  {{ scope.row.image_info.device }} <el-divider /> {{ scope.row.image_info.modality }} <el-divider /> {{ scope.row.image_info.slice }} <el-divider />
 
-                  <div><el-button type="text" size="medium" @click="handle(scope.row.url_view)">查看图像</el-button></div>
+                  <div><el-button type="text" size="medium" @click="handle(scope.row.study_info.StudyInstanceUIDs)">查看图片</el-button></div>
 
                 </template>
               </el-table-column>
@@ -157,8 +157,8 @@
 
           <el-table-column class-name="status-col" label="AI诊断结果" min-width="2" align="center">
             <template slot-scope="scope">
-              <div>脑侵袭：<el-tag :type="[scope.row.invasive==='否' ? 'success': 'danger']">{{ scope.row.invasive }}</el-tag></div> <br>
-              <div>分级：<el-tag :type="[scope.row.level==='良性' ? 'success': 'danger']">{{ scope.row.level }}</el-tag></div>
+              <div>脑侵袭：<el-tag :type="[scope.row.AI_info.invasive==='否' ? 'success': 'danger']">{{ scope.row.AI_info.invasive }}</el-tag></div> <br>
+              <div>分级：<el-tag :type="[scope.row.AI_info.level==='良性' ? 'success': 'danger']">{{ scope.row.AI_info.level }}</el-tag></div>
               <el-progress text-inside="true" :stroke-width="15" :percentage="100" style="margin-top: 25px;" />
             </template>
           </el-table-column>
@@ -168,7 +168,7 @@
               <div style="display: flex;width:100%;">
                 <div style="width:40%">手术日期：</div>
                 <el-date-picker
-                  v-model="scope.row.date"
+                  v-model="scope.row.surgery_info.date"
                   type="date"
                   placeholder="选择日期"
                   size="mini"
@@ -178,7 +178,7 @@
               <div style="display: flex;width:100%;">
                 <div style="width:40%">病变部位：</div>
                 <el-select
-                  v-model="scope.row.region"
+                  v-model="scope.row.surgery_info.region"
                   size="mini"
                   placeholder="请选择"
                   style="width:60%"
@@ -193,7 +193,7 @@
               <div style="display: flex;width:100%;">
                 <div style="width:40%">蛛网膜界面破坏：</div>
                 <el-select
-                  v-model="scope.row.zhuw"
+                  v-model="scope.row.surgery_info.zhuw"
                   size="mini"
                   placeholder="请选择"
                   style="width:60%"
@@ -209,7 +209,7 @@
               <div style="display: flex;width:100%;">
                 <div style="width:40%">辛普森分级：</div>
                 <el-select
-                  v-model="scope.row.xinp"
+                  v-model="scope.row.surgery_info.xinp"
                   size="mini"
                   placeholder="请选择"
                   style="width:60%"
@@ -222,9 +222,7 @@
                   />
                 </el-select>
               </div>
-              <!-- <el-divider /> -->
               <div>
-                <!-- <el-button type="primary" size="small">上传</el-button> -->
               </div>
             </template>
           </el-table-column>
@@ -234,7 +232,7 @@
               <div style="display: flex;width:100%;">
                 <div style="width:40%">脑侵袭：</div>
                 <el-select
-                  v-model="scope.row.p_invasive"
+                  v-model="scope.row.pathology_info.p_invasive"
 
                   size="mini"
                   placeholder="请选择"
@@ -252,7 +250,7 @@
               <div style="display: flex;width:100%;">
                 <div style="width:40%">分级：</div>
                 <el-select
-                  v-model="scope.row.p_level"
+                  v-model="scope.row.pathology_info.p_level"
                   size="mini"
                   placeholder="请选择"
                   style="width:60%"
@@ -267,13 +265,13 @@
 
               <div style="display: flex;width:100%;">
                 <div style="width:40%">增值指数：</div>
-                <el-input v-model="scope.row.vig" size="mini" placeholder="请输入" style="width:60%" />
+                <el-input v-model="scope.row.pathology_info.vig" size="mini" placeholder="请输入" style="width:60%" />
               </div>
 
               <div style="display: flex;width:100%;">
                 <div style="width:40%">病理亚型：</div>
                 <el-select
-                  v-model="scope.row.p_sub"
+                  v-model="scope.row.pathology_info.p_sub"
                   size="mini"
                   placeholder="请选择"
                   style="width:60%"
@@ -284,9 +282,7 @@
                     :label="item.label"
                     :value="item.value"
                   />
-                </el-select></div>
-              <!-- <el-divider /> -->
-              <!-- <div><el-button type="primary" size="small">上传</el-button></div> -->
+                </el-select></div> 
 
             </template>
           </el-table-column>
@@ -305,7 +301,7 @@
             </template>
           </el-table-column>
 
-        </el-table>
+        </el-table> 
         <!-- 列表分页 -->
         <el-pagination
           background
@@ -325,8 +321,7 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
-
+import axios from 'axios'
 export default {
   name: '',
   filters: {
@@ -396,6 +391,18 @@ export default {
       searchText: '',
       multipleSelection: [] }
   },
+  mounted: function () {
+    
+    axios.get('/api/Query', {
+        params: {
+          "find_state": 0,
+        }
+      }).then(res => {
+        this.list = res.data["result"]
+        this.listLoading = false
+      })
+  },
+
   computed: {
     filteredData() {
       if (!this.filterText) {
@@ -405,9 +412,9 @@ export default {
       return this.list.filter(item => item.name.toLowerCase().includes(filterText))
     }
   },
-  created() {
-    this.fetchData()
-  },
+  // created() {
+  //   // this.fetchData()
+  // },
   methods: {
     // 改变斑马线的颜色
     tableRowClassName({ row, rowIndex }) {
@@ -490,7 +497,8 @@ export default {
       this.handleCurrentChange(this.currentPage)
     },
     handle(url) {
-      window.open(url, '_parent')
+      console.log(url)
+      window.open("http://localhost:3000/viewer?StudyInstanceUIDs="+url, "_blank")
     }
   }
 

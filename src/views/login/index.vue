@@ -54,7 +54,6 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
-import axios from 'axios'
 
 export default {
   name: 'Login',
@@ -76,7 +75,7 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -84,7 +83,7 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: true
     }
   },
   watch: {
@@ -121,14 +120,27 @@ export default {
           return false
         }
       })
-      axios.get('/api/login', {
-        params: {
-          username: this.loginForm.username,
-          password: this.loginForm.password
-        }
-      }).then(res => {
-        console.log(res.data)
-      })
+      // this.$axios({
+      //   method: 'post',
+      //   url: 'http://127.0.0.1:5051/login', // 接口地址
+      //   data: {
+      //     number: this.loginForm.username,
+      //     password: this.loginForm.password
+      //   }
+      // })
+      //   .then(response => {
+      //     console.log(response, 'success') // 成功的返回
+      //   })
+      //   .catch(error => console.log(error, 'error')) // 失败的返回
+
+      // axios.get('/api/login', {
+      //   params: {
+      //     username: this.loginForm.username,
+      //     password: this.loginForm.password
+      //   }
+      // }).then(res => {
+      //   console.log(res.data)
+      // })
     }
   }
 }
