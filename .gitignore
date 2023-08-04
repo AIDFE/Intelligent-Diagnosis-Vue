@@ -6,6 +6,9 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 tests/**/coverage/
+Dicom_repository/
+Dicom_download/
+segmentation_saved/
 
 # Editor directories and files
 .idea

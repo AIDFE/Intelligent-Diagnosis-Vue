@@ -37,6 +37,8 @@
         </el-card>
       </el-col>
     </el-row>
+    <el-link type="info" disabled style="margin-top: 300px; width: 100%;">天津大学VIL实验室开发</el-link>
+  <!-- <div style="font-:">天津大学VIL实验室开发</div> -->
 
   </div>
 </template>

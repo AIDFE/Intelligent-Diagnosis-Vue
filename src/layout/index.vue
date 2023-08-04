@@ -39,6 +39,7 @@
 import Logo from '../assets/logo/logo.png'
 import { Navbar, Sidebar, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
+import jsCookie from 'js-cookie'
 
 export default {
   name: 'Layout',
@@ -52,7 +53,7 @@ export default {
     return {
       logo: Logo,
       circleUrl: require('@/assets/logo/avatar.png'),
-      userName: '用户名'
+      userName: jsCookie.get('username')
     }
   },
   computed: {

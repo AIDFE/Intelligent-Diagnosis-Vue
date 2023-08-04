@@ -7,13 +7,13 @@
       </div>
     </div>
 
-    <el-card style="width:25%;margin: auto;">
+    <el-card class="box-card">
       <el-form ref="form" :model="form" label-width="120px">
         <el-form-item label="用户名">
-          <el-input v-model="form.name" />
+          <el-input v-model.trim="form.name" />
         </el-form-item>
         <el-form-item label="设置密码" prop="password">
-          <el-input v-model="form.password" show-password />
+          <el-input v-model.trim="form.password" show-password />
         </el-form-item>
         <el-form-item label="用户类别">
           <el-radio-group v-model="form.access">
@@ -26,7 +26,8 @@
           <el-button @click="reset">重置</el-button>
         </el-form-item>
       </el-form>
-    </el-card></div>
+    </el-card>
+    </div>
 </template>
 
 <script>
@@ -44,7 +45,6 @@ export default {
   methods: {
     onSubmit() {
       regeisted(this.form).then(res => {
-          console.log(res)
           if (res.code === 20000){
             this.$message({
             message: '注册成功',
@@ -75,6 +75,12 @@ export default {
     display: inline-block;
     height: 47px;
     width: 200px;
+    margin-top: 0px;
+  }
+
+.box-card {
+    width: 430px;
+    margin: auto;
   }
 
 </style>

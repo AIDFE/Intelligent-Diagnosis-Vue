@@ -1,32 +1,36 @@
 <template>
-  <uploader :options="options" @file-success="onFileSuccess"   @file-complete="onFileComplete"  @file-error="onFileError" class="uploader-example" :file-status-text="statusText" ref="uploader">
+  <uploader :options="options" 
+  @file-success="onFileSuccess"   
+  @file-complete="onFileComplete"  
+  @file-error="onFileError" 
+  @file-added="onFileAdded"
+  class="uploader-example" :file-status-text="statusText" 
+  ref="uploader">
     <uploader-unsupport />
     <uploader-drop>
       <i class="el-icon-upload" />
       <p style="margin-left: 150px; font-size: 15px; color: gray;">温馨提示：可拖拽文件上传或点击下方按钮上传</p>
-      <p style="margin-left: 150px; font-size: 15px; color: gray;">请上传患者的dicom文件或文件夹</p>
+      <p style="margin-left: 150px; font-size: 15px; color: gray;">请上传患者的dicom文件夹上传</p>
 
     </uploader-drop>
-    <uploader-btn>选择文件</uploader-btn>
+    <!-- <uploader-btn>选择文件</uploader-btn> -->
     <uploader-btn :directory="true">选择文件夹</uploader-btn>
     <uploader-list />
-    <el-alert
-      title="文件上传成功"
-      type="success"
-      description="正在进行图像分析，请前往病例列表查看患者信息及分析结果"
-      show-icon
-    />
   </uploader>
 </template>
 
 <script>
-import {getSeg} from '@/api/seg'
 export default {
+  name: 'upload',
   data() {
     return {
       options: {
         target: '/api/uploadfile',
-        testChunks: false
+        testChunks: false,
+        simultaneousUploads: 1,
+        attrs: {
+        // 接受的文件类型 根据实际需要
+        accept: [".dcm"]},
       },
       // 上传状态
       statusText: {
@@ -40,23 +44,11 @@ export default {
   },
 
   methods: {
-    // onFileSuccess: function (rootFile, file, message, chunk) {
-    //   console.log(`文件: ${file.name} 上传成功`)
-    // },
     onFileComplete: function (rootFile) {
       this.$message({
-            message: '文件上传成功, 图像正在分析中...请前往病例列表查看',
+            message: '文件上传成功, 请前往病例列表查看',
             type: 'success'
         })
-        getSeg("9b42b32e-8d6d1704-cbb1a4b8-b172a8db-58db2590", "1.2.840.113564.345052603883.10332.635963047556560213.29").then(res => {
-          console.log(res)
-        //   if (res.code === 20000){
-        //     this.$message({
-        //     message: '注册成功',
-        //     type: 'success'
-        // })}
-  })
-
     },
     onFileError: function (rootFile, file, message, chunk) {
       this.$message({

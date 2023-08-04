@@ -1,7 +1,9 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <router-view :key="key" />
+      <keep-alive include="upload">
+    	<router-view/> // 需要缓存的页面
+    </keep-alive>
     </transition>
   </section>
 </template>

@@ -11,7 +11,7 @@
           </span>
           <el-input
             ref="username"
-            v-model="loginForm.username"
+            v-model.trim="loginForm.username"
             placeholder="用户名"
             name="username"
             type="text"
@@ -27,7 +27,7 @@
           <el-input
             :key="passwordType"
             ref="password"
-            v-model="loginForm.password"
+            v-model.trim="loginForm.password"
             :type="passwordType"
             placeholder="密码"
             name="password"
@@ -54,14 +54,16 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import jsCookie from 'js-cookie';
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('请输入正确的用户名'))
-      } else {
+      if (value.length === 0){
+        callback(new Error('用户名不能为空'))
+      }
+      else{
         callback()
       }
     }
@@ -74,8 +76,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '123456'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -91,7 +93,7 @@ export default {
       handler: function(route) {
         this.redirect = route.query && route.query.redirect
       },
-      immediate: true
+      // immediate: true
     }
   },
   methods: {
@@ -110,8 +112,9 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
+            this.$router.push({ name: '主页'})
             this.loading = false
+            jsCookie.set('username',this.loginForm.username)
           }).catch(() => {
             this.loading = false
           })
@@ -120,27 +123,6 @@ export default {
           return false
         }
       })
-      // this.$axios({
-      //   method: 'post',
-      //   url: 'http://127.0.0.1:5051/login', // 接口地址
-      //   data: {
-      //     number: this.loginForm.username,
-      //     password: this.loginForm.password
-      //   }
-      // })
-      //   .then(response => {
-      //     console.log(response, 'success') // 成功的返回
-      //   })
-      //   .catch(error => console.log(error, 'error')) // 失败的返回
-
-      // axios.get('/api/login', {
-      //   params: {
-      //     username: this.loginForm.username,
-      //     password: this.loginForm.password
-      //   }
-      // }).then(res => {
-      //   console.log(res.data)
-      // })
     }
   }
 }
